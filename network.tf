@@ -42,7 +42,7 @@ resource "google_compute_firewall" "allow-http" {
   network = "${google_compute_network.kafka-vpc.name}"
   allow {
     protocol = "tcp"
-    ports    = ["9000"]
+    ports    = ["80"]
   }
   target_tags = ["http-server"]
 }
