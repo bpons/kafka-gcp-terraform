@@ -1,0 +1,9 @@
+.terraform/plugins/darwin_amd64/terraform-provider-google_v2.16.0_x4
+.terraform/plugins/darwin_amd64/terraform-provider-template_v2.1.2_x4
+packer/gce_googlecompute.pem
+test-kafka-tf-201909-680fab95621e.json
+terraform.tfstate
+.DS_Store
+terraform.tfstate.backup
+.terraform/plugins/darwin_amd64/lock.json
+packer/logs/packer-logs.txt
