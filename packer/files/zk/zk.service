@@ -7,8 +7,8 @@ After=network.target
 [Service]    
 Type=forking
 WorkingDirectory=/opt/zookeeper
-User=ubuntu
-Group=ubuntu
+User=zk
+Group=zk
 ExecStart=/opt/zookeeper/bin/zkServer.sh start /opt/zookeeper/conf/zoo.cfg
 ExecStop=/opt/zookeeper/bin/zkServer.sh stop /opt/zookeeper/conf/zoo.cfg
 ExecReload=/opt/zookeeper/bin/zkServer.sh restart /opt/zookeeper/conf/zoo.cfg

@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "10.1.1.11 zoo1
 10.1.1.12 zoo2
 10.1.1.13 zoo3" | sudo tee --append /etc/hosts

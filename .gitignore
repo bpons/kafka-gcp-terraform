@@ -6,4 +6,4 @@ terraform.tfstate
 .DS_Store
 terraform.tfstate.backup
 .terraform/plugins/darwin_amd64/lock.json
-packer/logs/packer-logs.txt
+packer/logs

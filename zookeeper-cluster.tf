@@ -1,17 +1,17 @@
-variable "instances_count" {
+variable "zk_instances_count" {
   default = 3
 }
-data "template_file" "startup" {
-  count    = "${var.instances_count}"
-  template = "${file("${path.module}/scripts/startup.sh")}"
+data "template_file" "zk_startup" {
+  count    = "${var.zk_instances_count}"
+  template = "${file("${path.module}/scripts/zk-startup.sh")}"
   vars = {
     id = "${count.index + 1}"
   }
 }
 resource "google_compute_instance" "zookeeper" {
-  count        = "${var.instances_count}"
+  count        = "${var.zk_instances_count}"
   name         = "zoo${count.index + 1}"
-  machine_type = "n1-standard-2"
+  machine_type = "n1-standard-1"
   zone         = "${var.zones[count.index]}"
   tags         = ["ssh"]
 
@@ -29,6 +29,6 @@ resource "google_compute_instance" "zookeeper" {
     }
   }
 
-  metadata_startup_script = "${element(data.template_file.startup.*.rendered, count.index)}"
+  metadata_startup_script = "${element(data.template_file.zk_startup.*.rendered, count.index)}"
 
 }
