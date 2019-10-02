@@ -29,6 +29,10 @@ resource "google_compute_instance" "zookeeper" {
     }
   }
 
+  metadata = {
+    VmDnsSetting = "GlobalOnly"
+  }
+  
   metadata_startup_script = "${element(data.template_file.zk_startup.*.rendered, count.index)}"
 
 }

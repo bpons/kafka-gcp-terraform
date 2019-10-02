@@ -40,9 +40,18 @@ resource "google_compute_instance" "kafka-broker" {
     }
   }
 
+  metadata = {
+    VmDnsSetting = "GlobalOnly"
+  }
+  
   metadata_startup_script = "${element(data.template_file.kafka_startup.*.rendered, count.index)}"
+  
+  lifecycle {
+    ignore_changes = ["attached_disk"]
+  }
 
   depends_on = ["google_compute_instance.zookeeper"]
+  
 }
 
 resource "google_compute_attached_disk" "default" {
