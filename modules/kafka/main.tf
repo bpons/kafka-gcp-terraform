@@ -1,9 +1,5 @@
-variable "brokers_count" {
-  default = 3
-}
-
 resource "google_compute_disk" "kafka-data-disk" {
-  count                     = "${var.brokers_count}"
+  count                     = "${var.servers}"
   name                      = "kafka-data-disk-${count.index + 1}"
   type                      = "pd-ssd"
   size                      = "10"
@@ -12,7 +8,7 @@ resource "google_compute_disk" "kafka-data-disk" {
 }
 
 data "template_file" "kafka_startup" {
-  count    = "${var.brokers_count}"
+  count    = "${var.servers}"
   template = "${file("${path.module}/scripts/kafka-startup.sh")}"
   vars = {
     broker_id = "${count.index + 1}"
@@ -20,9 +16,9 @@ data "template_file" "kafka_startup" {
 }
 
 resource "google_compute_instance" "kafka-broker" {
-  count        = "${var.brokers_count}"
+  count        = "${var.servers}"
   name         = "kafka${count.index + 1}"
-  machine_type = "n1-standard-1"
+  machine_type = "n1-standard-2"
   zone         = "${var.zones[count.index]}"
   tags         = ["ssh"]
 
@@ -33,29 +29,25 @@ resource "google_compute_instance" "kafka-broker" {
   }
 
   network_interface {
-    subnetwork = "${google_compute_subnetwork.kafka-subnet.self_link}"
-    network_ip = "10.1.1.${count.index + 21}"
-    access_config {
-      // Ephemeral IP
-    }
+    subnetwork = "${var.subnet}"
   }
 
   metadata = {
     VmDnsSetting = "GlobalOnly"
   }
-  
+
   metadata_startup_script = "${element(data.template_file.kafka_startup.*.rendered, count.index)}"
   
   lifecycle {
     ignore_changes = ["attached_disk"]
   }
 
-  depends_on = ["google_compute_instance.zookeeper"]
+  depends_on = ["var.zookeeper_up"]
   
 }
 
 resource "google_compute_attached_disk" "default" {
-  count    = "${var.brokers_count}"
+  count    = "${var.servers}"
   disk     = "${element(google_compute_disk.kafka-data-disk.*.self_link, count.index)}"
   instance = "${element(google_compute_instance.kafka-broker.*.self_link, count.index)}"
 }
