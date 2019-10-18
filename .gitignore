@@ -8,3 +8,4 @@ terraform.tfstate.backup
 .terraform/plugins/darwin_amd64/lock.json
 packer/logs
 .terraform/modules/modules.json
+.terraform.tfstate.lock.info
