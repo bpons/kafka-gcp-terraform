@@ -20,6 +20,11 @@
             "destination": "/home/kafka"
         },
         {
+            "type": "file",
+            "source": "files/telegraf/",
+            "destination": "/home/kafka"
+        },
+        {
             "type": "shell",
             "script": "scripts/kafka-setup.sh"
         }

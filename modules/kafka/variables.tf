@@ -11,5 +11,5 @@ variable "zones" {
 }
 
 variable "zookeeper_up" {
-    type = string
+    type = bool
 }

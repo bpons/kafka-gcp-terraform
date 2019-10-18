@@ -1,0 +1,22 @@
+{
+    "builders": [
+        {
+            "type": "googlecompute",
+            "account_file": "../test-kafka-tf-201909-680fab95621e.json",
+            "project_id": "test-kafka-tf-201909",
+            "source_image_family": "centos-7",
+            "ssh_username": "centos",
+            "zone": "europe-west1-b",
+            "tags": [
+                "ssh"
+            ],
+            "image_name": "packer-influxdb"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "script": "scripts/influxdb-setup.sh"
+        }
+    ]
+}

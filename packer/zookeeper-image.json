@@ -20,6 +20,11 @@
             "destination": "/home/zk"
         },
         {
+            "type": "file",
+            "source": "files/telegraf/",
+            "destination": "/home/zk"
+        },
+        {
             "type": "shell",
             "script": "scripts/zk-setup.sh"
         }

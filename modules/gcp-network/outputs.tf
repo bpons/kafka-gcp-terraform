@@ -7,3 +7,6 @@ output "kafka_subnet" {
 output "management_subnet" {
   value       = "${google_compute_subnetwork.management_subnet.self_link}"
 }
+output "monitoring_subnet" {
+  value       = "${google_compute_subnetwork.monitoring_subnet.self_link}"
+}

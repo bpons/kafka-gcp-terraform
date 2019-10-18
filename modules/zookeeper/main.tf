@@ -21,6 +21,9 @@ resource "google_compute_instance" "zookeeper" {
 
   network_interface {
     subnetwork = "${var.subnet}"
+        access_config {
+      // Ephemeral IP
+    }
   }
 
   metadata = {

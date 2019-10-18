@@ -4,3 +4,6 @@ variable "clusters_region" {
 variable "management_region" {
     type    = "string"
 }
+variable "monitoring_region" {
+    type    = "string"
+}

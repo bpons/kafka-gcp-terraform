@@ -17,3 +17,13 @@ variable "management_zone" {
     type    = string
     default = "europe-west3-a"
 }
+
+variable "monitoring_region" {
+    type    = string
+    default = "europe-west3"
+}
+
+variable "monitoring_zone" {
+    type    = string
+    default = "europe-west3-b"
+}
