@@ -9,3 +9,4 @@ terraform.tfstate.backup
 packer/logs
 .terraform/modules/modules.json
 .terraform.tfstate.lock.info
+.terraform/plugins/darwin_amd64/terraform-provider-grafana_v1.5.0_x4
